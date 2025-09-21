@@ -2,102 +2,97 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import {
-	ArrowRight,
-	Mail,
-	Lock,
-	Shield,
-} from "lucide-react";
+import { ArrowRight, Mail, Lock, Shield } from "lucide-react";
 
 export default function Signup() {
 	useEffect(() => {
 		// Prevent scrolling on larger screens, allow on mobile
 		const handleResize = () => {
 			if (window.innerHeight >= 800) {
-				document.body.style.overflow = 'hidden';
+				document.body.style.overflow = "hidden";
 			} else {
-				document.body.style.overflow = 'unset';
+				document.body.style.overflow = "unset";
 			}
 		};
 
 		// Set initial state
 		handleResize();
-		
+
 		// Listen for window resize
-		window.addEventListener('resize', handleResize);
-		
+		window.addEventListener("resize", handleResize);
+
 		// Cleanup
 		return () => {
-			document.body.style.overflow = 'unset';
-			window.removeEventListener('resize', handleResize);
+			document.body.style.overflow = "unset";
+			window.removeEventListener("resize", handleResize);
 		};
 	}, []);
 
 	const [formData, setFormData] = useState({
-		email: '',
-		password: '',
-		confirmPassword: ''
+		email: "",
+		password: "",
+		confirmPassword: "",
 	});
 
 	const [errors, setErrors] = useState({
-		email: '',
-		password: '',
-		confirmPassword: ''
+		email: "",
+		password: "",
+		confirmPassword: "",
 	});
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
-		setFormData(prev => ({
+		setFormData((prev) => ({
 			...prev,
-			[name]: value
+			[name]: value,
 		}));
-		
+
 		// Clear error when user starts typing
 		if (errors[name as keyof typeof errors]) {
-			setErrors(prev => ({
+			setErrors((prev) => ({
 				...prev,
-				[name]: ''
+				[name]: "",
 			}));
 		}
 	};
 
 	const validateForm = () => {
 		const newErrors = {
-			email: '',
-			password: '',
-			confirmPassword: ''
+			email: "",
+			password: "",
+			confirmPassword: "",
 		};
 
 		// Email validation
 		if (!formData.email) {
-			newErrors.email = 'Email is required';
+			newErrors.email = "Email is required";
 		} else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-			newErrors.email = 'Please enter a valid email';
+			newErrors.email = "Please enter a valid email";
 		}
 
 		// Password validation
 		if (!formData.password) {
-			newErrors.password = 'Password is required';
+			newErrors.password = "Password is required";
 		} else if (formData.password.length < 8) {
-			newErrors.password = 'Password must be at least 8 characters';
+			newErrors.password = "Password must be at least 8 characters";
 		}
 
 		// Confirm password validation
 		if (!formData.confirmPassword) {
-			newErrors.confirmPassword = 'Please confirm your password';
+			newErrors.confirmPassword = "Please confirm your password";
 		} else if (formData.password !== formData.confirmPassword) {
-			newErrors.confirmPassword = 'Passwords do not match';
+			newErrors.confirmPassword = "Passwords do not match";
 		}
 
 		setErrors(newErrors);
-		return !Object.values(newErrors).some(error => error !== '');
+		return !Object.values(newErrors).some((error) => error !== "");
 	};
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
 		if (validateForm()) {
 			// TODO: Implement signup logic
-			console.log('Signup form submitted:', formData);
+			console.log("Signup form submitted:", formData);
 		}
 	};
 
@@ -152,7 +147,7 @@ export default function Signup() {
 											onChange={handleInputChange}
 											placeholder="Enter your email address"
 											className={`w-full h-10 pl-10 pr-4 text-sm rounded-lg border ${
-												errors.email ? 'border-red-500' : 'border-border'
+												errors.email ? "border-red-500" : "border-border"
 											} bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200`}
 										/>
 									</div>
@@ -178,7 +173,7 @@ export default function Signup() {
 											onChange={handleInputChange}
 											placeholder="Create a strong password"
 											className={`w-full h-10 pl-10 pr-4 text-sm rounded-lg border ${
-												errors.password ? 'border-red-500' : 'border-border'
+												errors.password ? "border-red-500" : "border-border"
 											} bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200`}
 										/>
 									</div>
@@ -204,19 +199,23 @@ export default function Signup() {
 											onChange={handleInputChange}
 											placeholder="Confirm your password"
 											className={`w-full h-10 pl-10 pr-4 text-sm rounded-lg border ${
-												errors.confirmPassword ? 'border-red-500' : 'border-border'
+												errors.confirmPassword
+													? "border-red-500"
+													: "border-border"
 											} bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200`}
 										/>
 									</div>
 									{errors.confirmPassword && (
-										<p className="text-xs text-red-500">{errors.confirmPassword}</p>
+										<p className="text-xs text-red-500">
+											{errors.confirmPassword}
+										</p>
 									)}
 								</div>
 							</form>
 
 							{/* Sign Up Button */}
 							<div className="flex items-center justify-center">
-								<Button 
+								<Button
 									onClick={handleSubmit}
 									className="w-3/4 h-9 bg-gradient-primary text-white font-medium hover:shadow-lg transition-all duration-300"
 								>
@@ -243,7 +242,11 @@ export default function Signup() {
 									variant="outline"
 									className="w-full h-10 text-sm font-medium hover:shadow-md transition-all duration-300"
 								>
-									<img src="/google.svg" alt="Google" className="h-4 w-4 mr-3" />
+									<img
+										src="/google.svg"
+										alt="Google"
+										className="h-4 w-4 mr-3"
+									/>
 									Sign up with Google
 								</Button>
 
@@ -252,7 +255,11 @@ export default function Signup() {
 									variant="outline"
 									className="w-full h-10 text-sm font-medium hover:shadow-md transition-all duration-300"
 								>
-									<img src="/github.svg" alt="GitHub" className="h-4 w-4 mr-3" />
+									<img
+										src="/github.svg"
+										alt="GitHub"
+										className="h-4 w-4 mr-3"
+									/>
 									Sign up with GitHub
 								</Button>
 							</div>
@@ -260,11 +267,17 @@ export default function Signup() {
 							{/* Terms and Conditions */}
 							<div className="text-center text-xs text-muted-foreground leading-relaxed">
 								By creating an account, you agree to our{" "}
-								<Link to="/terms" className="text-primary hover:underline font-medium">
+								<Link
+									to="/terms"
+									className="text-primary hover:underline font-medium"
+								>
 									Terms of Service
 								</Link>{" "}
 								and{" "}
-								<Link to="/privacy" className="text-primary hover:underline font-medium">
+								<Link
+									to="/privacy"
+									className="text-primary hover:underline font-medium"
+								>
 									Privacy Policy
 								</Link>
 							</div>
