@@ -3,21 +3,16 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
-import {
-	Brain,
-	ArrowRight,
-	Mail,
-	Lock,
-} from "lucide-react";
+import { Brain, ArrowRight, Mail, Lock } from "lucide-react";
 
 export default function Login() {
 	useEffect(() => {
 		// Prevent scrolling on mount
-		document.body.style.overflow = 'hidden';
-		
+		document.body.style.overflow = "hidden";
+
 		// Restore scrolling on unmount
 		return () => {
-			document.body.style.overflow = 'unset';
+			document.body.style.overflow = "unset";
 		};
 	}, []);
 
@@ -126,7 +121,11 @@ export default function Login() {
 									variant="outline"
 									className="w-full h-10 text-sm font-medium hover:shadow-md transition-all duration-300"
 								>
-									<img src="/google.svg" alt="Google" className="h-4 w-4 mr-3" />
+									<img
+										src="/google.svg"
+										alt="Google"
+										className="h-4 w-4 mr-3"
+									/>
 									Continue with Google
 								</Button>
 
@@ -135,7 +134,11 @@ export default function Login() {
 									variant="outline"
 									className="w-full h-10 text-sm font-medium hover:shadow-md transition-all duration-300"
 								>
-									<img src="/github.svg" alt="GitHub" className="h-4 w-4 mr-3" />
+									<img
+										src="/github.svg"
+										alt="GitHub"
+										className="h-4 w-4 mr-3"
+									/>
 									Continue with GitHub
 								</Button>
 							</div>
@@ -158,11 +161,17 @@ export default function Login() {
 					{/* Footer */}
 					<div className="mt-6 text-center space-y-3">
 						<div className="text-xs text-muted-foreground space-x-4">
-							<Link to="/terms" className="hover:text-primary transition-colors">
+							<Link
+								to="/terms"
+								className="hover:text-primary transition-colors"
+							>
 								Terms of Service
 							</Link>
 							<span>•</span>
-							<Link to="/privacy" className="hover:text-primary transition-colors">
+							<Link
+								to="/privacy"
+								className="hover:text-primary transition-colors"
+							>
 								Privacy Policy
 							</Link>
 						</div>
